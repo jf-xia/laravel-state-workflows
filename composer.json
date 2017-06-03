@@ -3,15 +3,25 @@
   "description": "Document staete machine workflows for Laravel 5+",
   "keywords": ["workflow", "laravel", "eloquent", "statemachine", "state", "transition"],
   "minimum-stability": "stable",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Sam Ciaramilaro",
-      "email": "samcharmy@gmail.com"
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Sam Ciaramilaro",
+        "email": "samcharmy@gmail.com"
+      }
+    ],
+    "require": {
+      "yohang/finite": "1.1.0",
+      "illuminate/support": "^5.4",
+      "illuminate/database": "^5.4"
+    },
+    "autoload": {
+      "classmap": [
+        "src/migrations"
+      ],
+      "psr-0": {
+        "Mass6\\LaravelStateWorkflows": "src/"
+      }
     }
-  ],
-  "require": {
-    "yohang/finite": "1.1.0"
-  }
 }
