@@ -2,6 +2,7 @@
   "name": "mass6/laravel-state-workflows",
   "description": "Document staete machine workflows for Laravel 5+",
   "keywords": ["workflow", "laravel", "eloquent", "statemachine", "state", "transition"],
+  "minimum-stability": "stable",
   "type": "library",
   "license": "MIT",
   "authors": [

@@ -12,11 +12,6 @@ trait StateMachineTrait
 {
 
     /**
-     * @var
-     */
-    public $configFactory;
-
-    /**
      * @var \Finite\StateMachine\StateMachine
      */
     protected $stateMachine;
