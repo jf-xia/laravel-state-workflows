@@ -20,6 +20,8 @@ class StateWorkflowsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../../migrations');
+        $this->publishes([
+            __DIR__.'/../../migrations/2017_06_01_000000_create_transition_events_table.php' => database_path('/migrations/2017_06_01_000000_create_transition_events_table.php'),
+        ]);
     }
 }
