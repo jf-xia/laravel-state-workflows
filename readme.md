@@ -43,7 +43,7 @@ Next, if opting to use the transition auditing feature, run the migration to cre
 
 To run the migrations from the package directly:
  ```bash
- php artisan migrate --path=vendor/mass6/laravel-state-workflows
+ php artisan migrate --path=vendor/mass6/laravel-state-workflows/src/migrations
  ```
  
 Or, publish the migration asset if you wish to include the migration in your own project:
