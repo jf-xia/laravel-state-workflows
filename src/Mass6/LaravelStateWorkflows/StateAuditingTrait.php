@@ -12,7 +12,7 @@ trait StateAuditingTrait
     /**
      * Boots the audit trail trait
      */
-    public static function bootStateAuditTrait()
+    public static function bootStateAuditingTrait()
     {
         static::saveInitialState();
     }
@@ -39,6 +39,13 @@ trait StateAuditingTrait
     protected $auditTrailAttributes;
 
     /**
+     * Whether of not to save the initial state before any transitions are applied
+     *
+     * @return boolean
+     */
+    abstract public function shouldSaveInitialState() : bool;
+
+    /**
      * If the model's saveInitialState property is set to true,
      * save the initial state to the database when it is first created.
      */
@@ -46,7 +53,7 @@ trait StateAuditingTrait
     {
         static::created(function ($model) {
             $transition = new \Finite\Transition\Transition(null, null, $model->findInitialState());
-            if ((bool) $model->saveIntialState){
+            if ((bool) $model->shouldSaveInitialState()){
                 $model->storeAuditTrail($transition, true);
             }
         });

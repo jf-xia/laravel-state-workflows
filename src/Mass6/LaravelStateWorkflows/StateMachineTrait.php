@@ -340,7 +340,7 @@ trait StateMachineTrait
                     $stateTransition,
                     $this->getState()
                 );
-                Log::error($defaultErrorMessage);
+                \Log::error($defaultErrorMessage);
                 $errorMessage = $errorMessage ?: $defaultErrorMessage;
                 if (method_exists($this, 'errors')) {
                     $this->errors()->add($attribute, $errorMessage);
