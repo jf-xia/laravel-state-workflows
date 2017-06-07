@@ -14,7 +14,9 @@ trait StateAuditingTrait
      */
     public static function bootStateAuditingTrait()
     {
-        static::saveInitialState();
+        if (static::$saveInitialState) {
+            static::saveInitialState();
+        }
     }
 
     /**
@@ -100,6 +102,7 @@ trait StateAuditingTrait
     protected function restoreStateMachine($instance)
     {
         // Initialize the StateMachine when the $instance is loaded from the database and not created via __construct() method
+        foreach ($instance->stateMachines as $stateMachine)
         $instance->getStateMachine()->initialize();
     }
 
