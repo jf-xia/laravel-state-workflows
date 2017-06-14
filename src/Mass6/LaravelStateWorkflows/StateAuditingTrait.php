@@ -14,9 +14,7 @@ trait StateAuditingTrait
      */
     public static function bootStateAuditingTrait()
     {
-        if (static::$saveInitialState) {
-            static::saveInitialState();
-        }
+        static::saveInitialState();
     }
 
     /**
@@ -45,7 +43,14 @@ trait StateAuditingTrait
      *
      * @return boolean
      */
-    abstract public function shouldSaveInitialState() : bool;
+    abstract protected function shouldSaveInitialState() : bool;
+
+    /**
+     * Transitions not to keep an audit trail for
+     *
+     * @return array
+     */
+    abstract protected function getExcludedTransitions() : array;
 
     /**
      * If the model's saveInitialState property is set to true,
@@ -114,6 +119,10 @@ trait StateAuditingTrait
      */
     public function storeAuditTrail($transitionEvent, $save = true)
     {
+        if (in_array($transitionEvent->getTransition()->getName(), $this->dontKeepAuditTrailOfTransitions)) {
+            return;
+        }
+
         // Save State Machine model to log initial state
         if ($save === true || $this->exists === false) {
             $this->save();
