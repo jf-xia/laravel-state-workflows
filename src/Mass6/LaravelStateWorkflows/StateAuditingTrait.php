@@ -119,10 +119,6 @@ trait StateAuditingTrait
      */
     public function storeAuditTrail($transitionEvent, $save = true)
     {
-        if (in_array($transitionEvent->getTransition()->getName(), $this->dontKeepAuditTrailOfTransitions)) {
-            return;
-        }
-
         // Save State Machine model to log initial state
         if ($save === true || $this->exists === false) {
             $this->save();
@@ -131,6 +127,9 @@ trait StateAuditingTrait
             $transition = $transitionEvent->getTransition();
         } else {
             $transition = $transitionEvent;
+        }
+        if (in_array($transition->getName(), $this->dontKeepAuditTrailOfTransitions)) {
+            return;
         }
 
         $this->auditTrailModel = app($this->auditTrailClass);
